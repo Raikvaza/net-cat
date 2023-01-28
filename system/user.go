@@ -35,6 +35,7 @@ func (user *UserThread) UserHandler(chBroad chan BroadCastStatus, chMsg chan Bro
 		return
 	}
 	user.AddNewName() // adding a new user name
+	user.chat.PrintAllHistory(user)
 	user.mu.Lock()
 	chBroad <- BroadCastStatus{ // BroadCaseting the status of a new User
 		Name:        user.name,
@@ -51,7 +52,7 @@ func (user *UserThread) UserHandler(chBroad chan BroadCastStatus, chMsg chan Bro
 			delete(totalUsers, user.name)
 			chBroad <- BroadCastStatus{IsConnected: false, Name: user.name}
 			user.mu.Unlock()
-			log.Println("Got out")
+			log.Printf("%s", FormatMsg("Admin", "User logget off"))
 			return
 		}
 		if err != nil {
@@ -64,7 +65,7 @@ func (user *UserThread) UserHandler(chBroad chan BroadCastStatus, chMsg chan Bro
 			user.mu.Lock()
 			chMsg <- BroadCastMessage{
 				Name: user.name,
-				Msg:  text,
+				Msg:  FormatMsg(user.name, text),
 			}
 			user.mu.Unlock()
 		}

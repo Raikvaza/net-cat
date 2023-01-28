@@ -59,8 +59,8 @@ func (chat *Chat) send(msg string, name string) {
 
 	for user, Conn := range totalUsers { // Range over all users and print msg to others
 		if user != name {
-			fmt.Fprint(Conn, "\n"+msg)
-			fmt.Fprint(Conn, "\n"+FormatMsg(user, ""))
+			fmt.Fprint(Conn, "\n"+msg+"\n")
+			fmt.Fprint(Conn, FormatMsg(user, ""))
 
 		}
 	}
@@ -70,7 +70,13 @@ func FormatMsg(name string, msg string) string { //Formats the message properly
 
 	formattedTime := time.Now().Format("2006-01-02 15:04:05")
 	// fmt.Println(formattedTime)
-	formattedInput := fmt.Sprintf("\n[%s][%s]:%s", formattedTime, name, msg)
+	formattedInput := fmt.Sprintf("[%s][%s]:%s", formattedTime, name, msg)
 	return strings.TrimSpace(formattedInput)
+}
 
+func (chat *Chat) PrintAllHistory(user *UserThread) {
+
+	for _, text := range chat.HistoryBuffer {
+		fmt.Fprintf(user.conn, text+"\n")
+	}
 }
