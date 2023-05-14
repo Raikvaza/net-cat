@@ -2,26 +2,15 @@
 
 This project consists on recreating the NetCat in a Server-Client Architecture that can run in a server mode on a specified port listening for incoming connections, and it can be used in client mode, trying to connect to a specified port and transmitting information to the server.
 
-## Allowed Packages
-- io
-- log
-- os
-- fmt
-- net
-- sync
-- time
-- bufio
-- errors
-- strings
-- reflect
-
 ## Usage/Examples
 
 ### Run server locally
+
 ```bash
 go run cmd/main.go
 2023/01/30 18:20:00 Started the server at  localhost:8989
 ```
+
 ```bash
 go run cmd/main.go 2525
 2023/01/30 18:23:31 Started the server at  localhost:2525
@@ -32,12 +21,14 @@ go run cmd/main.go localhost 2525
 [USAGE]: ./TCPChat $port
 ```
 
-```bash 
+```bash
 go run cmd/main.go abc
 2023/01/30 18:20:54 listen tcp: lookup tcp/asd: Servname not supported for ai_socktype
 exit status 1
 ```
+
 ### Client example
+
 ```bash
 nc $IP $port
 Welcome to TCP-Chat!
@@ -59,7 +50,9 @@ _)      \.___.,|     .'
      `-'       `--'
 [ENTER YOUR NAME]:
 ```
+
 Client1 (Yenlik):
+
 ```bash
 nc localhost 2525
 Welcome to TCP-Chat!
@@ -97,7 +90,9 @@ Lee has joined our chat...
 [2020-01-20 16:04:57][Yenlik]:
 Lee has left our chat...
 ```
+
 Client2 (Lee):
+
 ```bash
 nc localhost 2525
 Yenliks-MacBook-Air:simpleTCPChat ybokina$ nc localhost 2525
@@ -133,5 +128,3 @@ _)      \.___.,|     .'
 [2020-01-20 16:04:57][Lee]:^C
 
 ```
-
-
